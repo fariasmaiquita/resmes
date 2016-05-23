@@ -1,0 +1,30 @@
+<section class="app-views-section fixed-section">
+    <div class="quick-nav">
+        <a ui-sref="resmes.home" class="button" title="Close">×</a>
+        <a ng-click="prevSubpanel()" class="button" title="Prev">&laquo;</a>
+        <a ng-click="nextSubpanel()" class="button" title="Next">&raquo;</a>
+    </div>
+    <div class="view-wrapper fixed-section" custom-scrollbar="minimal-dark">
+        <div class="img-wrapper">
+            <img src="assets/img/resmes-welcome-art.jpg" alt="Resm.es Welcome Art" preload-img>
+        </div>
+        <div class="subpanel-content">
+            <h4>Create badass resumes like a boss...</h4>
+            <br>
+            <p>Resm.es℠ is an online service built around the concept of allowing users to create sleek looking resumes in a fraction of the time one would normally take.</p>
+            <p>This current build is an alpha version. We're releasing this early version to give users a taste of what is there to come.</p>
+            <br>
+            <p>
+                <a ui-sref="resmes.layouts.demo({slug: 'one'})" class="button">
+                    Show me a Demo &rarr;
+                </a>
+                &nbsp;
+                <a ui-sref="resmes.typography" class="button outline">
+                    Start Crafting Now &rarr;
+                </a>
+            </p>
+            <br>
+            <p>Also, do take a moment to read our <a ui-sref="resmes.privacy">Privacy Policy</a> and/or our <a ui-sref="resmes.terms">Terms and Conditions</a>. Got a question? Drop us a line via email: <a href="mailto:folks@resm.es">folks@resm.es</a></p>
+        </div>
+    </div>
+</section>

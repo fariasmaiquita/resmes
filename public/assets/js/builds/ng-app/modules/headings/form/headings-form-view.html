@@ -1,0 +1,66 @@
+<div class="view-form-wrapper" custom-scrollbar="minimal-dark">
+    <form name="hdgForm.form" class="view-form" ng-submit="hdgForm.submitForm()" novalidate>
+        <fieldset class="fields-wrapper">
+            <header class="form-header">
+                <h6 class="loading-alert capitalized">
+                    <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin" ng-if="hdgForm.formHeaderLoader">
+                    {{ hdgForm.formTitle }}
+                </h6>
+                <a ui-sref="resmes.headings" class="cancel-button" title="Cancel Entry">×</a>
+            </header>
+            <div class="form-body slide-animation" ng-if="hdgForm.formIsCreating || hdgForm.formUpdateReady">
+                <ul class="form-errors slide-animation" ng-if="hdgForm.formSubmitted && (!hdgForm.form.$valid || hdgForm.serverError)">
+                    <li class="slide-animation" ng-if="hdgForm.form.title.$error.required">
+                        <strong>Title</strong> is a required field
+                    </li>
+                    <li class="slide-animation" ng-if="hdgForm.serverError">
+                        <span ng-if="hdgForm.serverError.validatorFailed">
+                            <strong>Server Validation Failed.</strong><br>
+                            Double-check every entry field before resubmitting them.
+                        </span>
+                        <span ng-if="!hdgForm.serverError.validatorFailed">
+                            <strong>Internal Server Error.</strong><br>
+                            If problem persists, please report the issue to our support lines.
+                        </span>
+                    </li>
+                </ul>
+                
+                <div class="custom-checkbox">
+                    <input type="checkbox" id="hdg-disabled" name="disabled" ng-model="hdgForm.hdgDisabled" ng-change="hdgForm.updateTitles()">
+                    <div class="switch">
+                        <div class="handle self-clear">
+                            <span class="text">Yes</span>
+                            <span class="bull"></span>
+                            <span class="text">No</span>
+                        </div>
+                    </div>
+                    <label class="full-width" for="hdg-disabled">
+                        Disable titles for this section?
+                    </label>
+                </div>
+                
+                <input type="text" name="title" placeholder="Title" autocomplete="off" ng-model="hdgForm.formData.title" ng-required="!hdgForm.hdgDisabled" ng-if="!hdgForm.hdgDisabled" class="slide-animation" ng-change="hdgForm.showCounter('title')" ng-blur="hdgForm.hideCounter()">
+                <input type="text" name="subtitle" placeholder="Subtitle" autocomplete="off" ng-model="hdgForm.formData.subtitle" ng-if="!hdgForm.hdgDisabled" class="slide-animation" ng-change="hdgForm.showCounter('subtitle')" ng-blur="hdgForm.hideCounter()">
+                <label class="full-width" ng-if="!hdgForm.hdgDisabled" class="slide-animation">
+                    <span class="highlight">TIP</span>
+                    <span> Keep your title/subtitle under 50 characteres. </span>
+                    <span ng-if="hdgForm.charCounter.isCounting">
+                        <span>( Current count: </span>
+                        <span ng-class="hdgForm.getCounterClass()">
+                            {{ hdgForm.charCounter.count }}
+                        </span>
+                        <span>)</span>
+                    </span>
+                </label>
+                <footer class="form-buttons">
+                    <h6 class="loading-alert" ng-if="hdgForm.formLoading">
+                        <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                        Processing, please wait...
+                    </h6>
+                    <input type="submit" value="{{ hdgForm.formSubmitText }}" class="button" ng-if="!hdgForm.formLoading">
+                    <a ui-sref="resmes.headings" class="button outline" ng-if="!hdgForm.formLoading">{{ hdgForm.formCancelText }}</a>
+                </footer>
+            </div>
+        </fieldset>
+    </form>
+</div>

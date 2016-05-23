@@ -1,0 +1,69 @@
+<div class="view-form-wrapper" custom-scrollbar="minimal-dark">
+    <form name="gnrForm.form" class="view-form" ng-submit="gnrForm.submitForm()" novalidate>
+        <fieldset class="fields-wrapper">
+            <header class="form-header">
+                <h6 class="loading-alert capitalized">
+                    <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin" ng-if="gnrForm.formHeaderLoader">
+                    {{ gnrForm.formTitle }}
+                </h6>
+                <a ui-sref="resmes.general" class="cancel-button" title="Cancel Entry">×</a>
+            </header>
+            <div class="form-body slide-animation" ng-if="gnrForm.formUpdateReady">
+                
+                <ul class="form-errors slide-animation" ng-if="gnrForm.formSubmitted && (!gnrForm.form.$valid || gnrForm.serverError)">
+                    <li class="slide-animation" ng-if="gnrForm.form.full_name.$error.required">
+                        <strong>Full Name</strong> is a required field
+                    </li>
+                    <li class="slide-animation" ng-if="gnrForm.form.phone.$error.required">
+                        <strong>Phone Number</strong> is a required field
+                    </li>
+                    <li class="slide-animation" ng-if="gnrForm.form.phone.$error.pattern">
+                        <strong>Phone Number</strong> contains invalid characters
+                    </li>
+                    <li class="slide-animation" ng-if="gnrForm.form.email.$error.required">
+                        <strong>Email</strong> is a required field
+                    </li>
+                    <li class="slide-animation" ng-if="gnrForm.form.email.$error.email">
+                        <strong>Email</strong> entered is not valid
+                    </li>
+                    <li class="slide-animation" ng-if="gnrForm.serverError">
+                        <span ng-if="gnrForm.serverError.validatorFailed">
+                            <strong>Server Validation Failed.</strong><br>
+                            Double-check every entry field before resubmitting them.
+                        </span>
+                        <span ng-if="!gnrForm.serverError.validatorFailed">
+                            <strong>Internal Server Error.</strong><br>
+                            If problem persists, please report the issue to our support lines.
+                        </span>
+                    </li>
+                </ul>
+                
+                <!-- Profile Overview -->
+                
+                <input type="text" name="full_name" placeholder="Full Name *" autocomplete="off" ng-model="gnrForm.formData.full_name" ng-if="gnrForm.formData.profileEntry" required>
+                <input type="text" name="headline" placeholder="Resume Headline" autocomplete="off" ng-model="gnrForm.formData.headline" ng-if="gnrForm.formData.profileEntry">
+                <textarea rows="3" name="summary" id="gnr-summary" placeholder="Summary" ui-tinymce="gnrForm.summaryOptions" ng-model="gnrForm.formData.summary" ng-if="gnrForm.formData.profileEntry"></textarea>
+                
+                <!-- Contact Details -->
+                
+                <input type="text" name="location" placeholder="Location" autocomplete="off" ng-model="gnrForm.formData.location" ng-if="!gnrForm.formData.profileEntry">
+                <input type="text" name="phone" placeholder="Phone Number *" autocomplete="off" ng-model="gnrForm.formData.phone" required ng-pattern="/^[\d\s()+-]*$/" ng-if="!gnrForm.formData.profileEntry">
+                <input type="email" name="email" placeholder="Email *" autocomplete="off" ng-model="gnrForm.formData.email" ng-if="!gnrForm.formData.profileEntry" required>
+                <input type="text" name="website" placeholder="Website" autocomplete="off" ng-model="gnrForm.formData.website" ng-if="!gnrForm.formData.profileEntry">
+                <label class="full-width">
+                    <span class="highlight">TIP</span>
+                    <span> {{ gnrForm.formTip }}</span>
+                </label>
+                <footer class="form-buttons">
+                    <h6 class="loading-alert" ng-if="gnrForm.formLoading">
+                        <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                        Processing, please wait...
+                    </h6>
+                    <input type="submit" value="Update Changes" class="button" ng-if="!gnrForm.formLoading">
+                    <a ui-sref="resmes.general" class="button outline" ng-if="!gnrForm.formLoading">Discard Changes</a>
+                </footer>
+                
+            </div>
+        </fieldset>
+    </form>
+</div>

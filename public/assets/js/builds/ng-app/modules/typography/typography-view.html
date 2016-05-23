@@ -1,0 +1,76 @@
+<section class="app-views-section fixed-section">
+    <div class="quick-nav">
+        <a ui-sref="resmes.home" class="button" title="Close">×</a>
+        <a ng-click="prevSubpanel()" class="button" title="Prev">&laquo;</a>
+        <a ng-click="nextSubpanel()" class="button" title="Next">&raquo;</a>
+    </div>
+    <div class="view-wrapper fixed-section" custom-scrollbar="minimal-dark">
+        <header class="view-header self-clear">
+            <h5>Customize Typography</h5>
+        </header>
+        <ul class="view-entries">
+            <li class="slide-animation" ng-if="typ.loading">
+                <h6 class="loading-alert">
+                    <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                    Loading, please wait...
+                </h6>
+            </li>
+            <li class="slide-animation" ng-if="typ.serverError">
+                <h6>
+                    Internal Server Error.<br>
+                    Settings could not be loaded at this time.
+                </h6>
+            </li>
+            <li ng-repeat="typography in cachedTypographies | orderBy : typ.prioritySorter" ng-if="!typ.loading && !typ.serverError" class="slide-animation">
+                <a ui-sref="resmes.typography.customize({ section: typography.section })" class="button" ng-if="typography.empty">Customize</a>
+                
+                <h6 class="main-heading capitalized">
+                    <span ng-if="typography.section != 'size' && typography.section != 'color'">
+                        {{ typography.section }} Custom Font
+                    </span>
+                    <span ng-if="typography.section == 'size'">
+                        Custom Font Size
+                    </span>
+                    <span ng-if="typography.section == 'color'">
+                        Custom Secondary Color
+                    </span>
+                </h6>
+                
+                <div class="long-text" ng-if="typography.empty && typography.section != 'size' && typography.section != 'color'">
+                    None (Defaults to {{ typ.resumeOpts['defaults']['font']['family'] }} / Inherited Font)
+                </div>
+                <div class="long-text" ng-if="typography.empty && typography.section == 'size'">
+                    Default Size: &nbsp; {{ typ.resumeOpts['defaults']['size']['label'] }}
+                </div>
+                <div class="long-text" ng-if="typography.empty && typography.section == 'color'">
+                    <span>Default Color: &nbsp;</span>
+                    <span class="highlight" style="background:{{ typ.resumeOpts['defaults']['palette']['color'] }};">
+                        {{ typ.resumeOpts['defaults']['palette']['label'] }}
+                    </span>
+                </div>
+                
+                <div class="long-text capitalized" ng-if="typography.font_family">
+                    <p>Font: &nbsp; {{ typography.font_family }}</p>
+                </div>
+                <div class="long-text capitalized" ng-if="typography.font_size">
+                    <p>Size: &nbsp; {{ typ.resumeOpts['sizes'][typography.font_size]['label'] }}</p>
+                </div>
+                <div class="long-text capitalized" ng-if="typography.palette_color">
+                    <p>
+                        <span>Color: &nbsp;</span>
+                        <span class="highlight" style="background:{{ typography.palette_color }};">
+                            {{ typ.resumeOpts['palettes'][typography.palette_color]['label'] }}
+                        </span>
+                    </p>
+                </div>
+                
+                <span ng-if="!typography.empty">
+                    <a ui-sref="resmes.typography.edit({id: typography.id})">Edit</a>
+                    &nbsp;&bull;&nbsp;
+                    <a ui-sref="resmes.typography.delete({id: typography.id})">Delete</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div ui-view="form" class="opacity-animation"></div>
+</section>

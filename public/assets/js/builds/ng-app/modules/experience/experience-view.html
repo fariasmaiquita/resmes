@@ -1,0 +1,52 @@
+<section class="app-views-section fixed-section">
+    <div class="quick-nav">
+        <a ui-sref="resmes.home" class="button" title="Close">×</a>
+        <a ng-click="prevSubpanel()" class="button" title="Prev">&laquo;</a>
+        <a ng-click="nextSubpanel()" class="button" title="Next">&raquo;</a>
+    </div>
+    <div class="view-wrapper fixed-section" custom-scrollbar="minimal-dark">
+        <header class="view-header self-clear">
+            <h5>Edit Experience</h5>
+            <a ui-sref="resmes.experience.add" class="button">Add Position</a>
+        </header>
+        <ul class="view-entries">
+            <li class="slide-animation" ng-if="exp.loading">
+                <h6 class="loading-alert">
+                    <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                    Loading, please wait...
+                </h6>
+            </li>
+            <li class="slide-animation" ng-if="cachedExperiences.length == 0 && !exp.loading && !exp.serverError">
+                <h6>
+                    No entries have been found.<br>
+                    Click the "Add Position" button to get started.
+                </h6>
+            </li>
+            <li class="slide-animation" ng-if="exp.serverError">
+                <h6>
+                    Internal Server Error.<br>
+                    Entries could not be loaded at this time.
+                </h6>
+            </li>
+            <li class="slide-animation" ng-repeat="experience in cachedExperiences | orderBy : [exp.endDateSorter, 'start_date'] : true">
+                <h6 class="company main-heading">{{ experience.company }}</h6>
+                <h6 class="title">{{ experience.title }}</h6>
+                <span class="period-location">
+                    <time class="start-date">{{ (experience.start_date) | date: 'MMMM yyyy' }}</time>
+                    &ndash;
+                    <time class="end-date">
+                        {{ experience.end_date ? (experience.end_date) : 'Present' | date: 'MMMM yyyy' }}
+                    </time>
+                    {{ experience.location ? ' &nbsp;/&nbsp; In ' + experience.location : '' }}
+                </span>
+                <div class="description long-text" ng-bind-html="experience.description"></div>
+                <span>
+                    <a ui-sref="resmes.experience.edit({id: experience.id})">Edit</a>
+                    &nbsp;&bull;&nbsp;
+                    <a ui-sref="resmes.experience.delete({id: experience.id})">Delete</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div ui-view="form" class="opacity-animation"></div>
+</section>

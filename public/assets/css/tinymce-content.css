@@ -1,0 +1,22 @@
+/* Custom Tinymce Content CSS */
+
+body {
+    font: 12px/18px sans-serif;
+}
+
+blockquote {
+    margin: 0 30px;
+    color: #777;
+    font-style: italic;
+}
+
+blockquote:before {
+    content: '\201C';
+    display: inline-block;
+    position: absolute;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 40px;
+    margin-left: -30px;
+    margin-top: 8px;
+}

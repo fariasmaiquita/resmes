@@ -1,0 +1,53 @@
+<section class="app-views-section fixed-section">
+    <div class="quick-nav">
+        <a ui-sref="resmes.home" class="button" title="Close">×</a>
+    </div>
+    <div class="view-wrapper fixed-section" custom-scrollbar="minimal-dark">
+        <header class="view-header self-clear">
+            <h5>My Drawer</h5>
+            <a ui-sref="resmes.drawer.add" class="button opacity-animation" ng-if="userSignedIn">
+                New Resume
+            </a>
+        </header>
+        <ul class="view-entries">
+            <li class="slide-animation" ng-if="drw.loading || loadingUser">
+                <h6 class="loading-alert">
+                    <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                    Loading, please wait...
+                </h6>
+            </li>
+            <li class="slide-animation" ng-if="drw.serverError">
+                <h6>
+                    Internal Server Error.<br>
+                    Your resumes could not be loaded at this time.
+                </h6>
+            </li>
+            <li class="slide-animation" ng-if="!userSignedIn && !(drw.loading || loadingUser)">
+                <h6 class="">Got Facebook? Use it to access this section.</h6>
+                <a ng-click="drw.signIn()" class="button">Sign In</a>
+            </li>
+            
+            <li class="slide-animation" ng-repeat="resume in cachedResumes | orderBy : 'updated_at' : true" ng-if="userSignedIn" ng-class="resume.id == currResume.id ? 'activated' : null">
+                <h6 class="main-heading">{{ resume.title || 'Untitled Resume' }}</h6>
+                <div class="long-text">
+                    <p ng-class="resume.draft ? 'draft-mark' : null">
+                        <span>
+                            Last Activity:
+                            {{ drw.convertToDate(resume.updated_at) | date:'MMM d, y @ h:mm a' }}
+                        </span>
+                    </p>
+                </div>
+                <span>
+                    <span ng-if="resume.id != currResume.id">
+                        <a ng-click="drw.openResume(resume.id)">Open</a>
+                        &nbsp;&bull;&nbsp;
+                    </span>
+                    <a ui-sref="resmes.drawer.edit({id: resume.id})">Edit Properties</a>
+                    &nbsp;&bull;&nbsp;
+                    <a ui-sref="resmes.drawer.delete({id: resume.id})">Delete</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div ui-view="form" class="opacity-animation"></div>
+</section>

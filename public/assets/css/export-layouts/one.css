@@ -1,0 +1,97 @@
+* { margin: 0; padding: 0; border: 0; vertical-align: baseline; }
+body { color: #222; line-height: 1; }
+a, a:visited { color: #222; text-decoration: none; outline: 0; cursor: pointer; }
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: baseline; padding-bottom: 2px; }
+
+@font-face {
+    font-family: 'ResmesCustomBullet';
+    src: url('../../fonts/ResmesCustomBullet.eot');
+    src: url('../../fonts/ResmesCustomBullet.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/ResmesCustomBullet.woff') format('woff'),
+         url('../../fonts/ResmesCustomBullet.ttf') format('truetype'),
+         url('../../fonts/ResmesCustomBullet.svg#ResmesCustomBullet') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.icon-bullet:before{
+    content:'\002E';
+    display: inline-block;
+    font-family: 'ResmesCustomBullet';
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+.boldless { font-weight: normal; }
+.italics { font-style: italic; color: #777; }
+.align-top { vertical-align: top; }
+.align-bottom { vertical-align: bottom; }
+.text-align-right { text-align: right; }
+.long-text { padding-top: 5px; }
+.long-text p { margin-bottom: 8px; }
+.long-text ul, .long-text ol { margin: 0 0 8px 16px; }
+.long-text blockquote { position: relative; font-style: italic; }
+.long-text blockquote:before {
+    content: '\201C';
+    position: absolute;
+    /*font-family: serif;
+    font-weight: bold;*/
+    /*font-size: 40px;*/ font-size: 2.86em;
+    left: 0;
+    margin-left: -35px;
+    margin-top: -8px;
+}
+.separator {
+    padding: 17px 0 5px;
+    /*font-size: 6px;*/ font-size: 0.43em;
+}
+.margin-aligner { margin-bottom: 8px; }
+.remove-padding { padding: 0 !important; }
+
+#wrapper { margin: 44px 44px 0; max-height: 1034px; }
+#skeleton > * > tr > td:first-child { width: 408px; padding-right: 62px; }
+#skeleton > * > tr > td:last-child { width: 235px; }
+#skeleton thead td { vertical-align: top; }
+
+.main .entry tr td:first-child {
+    width: 90px;
+    padding-right: 18px;
+    text-align: right;
+    font-style: italic;
+    color: #555;
+}
+.main .entry .header td { padding-top: 20px; }
+.main .entry .header .sub-heading {
+    /*font-size: 14px;*/ font-size: 0.85em;
+    color: #555;
+}
+.main .separator { padding-left: 108px; }
+
+.aside #header-mark { position: relative; height: 55px; }
+.aside #header-mark .icon-bullet, #mark-letter {
+    position: absolute;
+    width: 50px;
+    /*line-height: 50px;*/
+    text-align: center;
+    right: 0;
+    top: 0;
+}
+.aside #header-mark .icon-bullet:before {
+    /*font-size: 50px;*/ font-size: 3.125em;
+    /*line-height: 50px;*/
+}
+.aside #mark-letter {
+    font-weight: bold;
+    /*font-size: 25px;*/ font-size: 1.79em;
+    color: #fff;
+    line-height: 2;
+    vertical-align: text-top;
+}
+.aside .title { padding-top: 20px; padding-bottom: 5px; }
+.aside .title .sub-heading {
+    /*font-size: 13px;*/ font-size: 0.93em;
+    color: #555;
+}
+.aside .entry { padding-top: 15px; }

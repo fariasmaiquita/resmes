@@ -1,0 +1,136 @@
+<header class="app-header fixed-section" custom-scrollbar="minimal">
+    <a ui-sref="resmes.home" class="logo">
+        <img src="assets/img/resmes_logo.svg" alt="Resm.es Logo">
+        <h1>Resm.es <sup>alpha</sup></h1>
+    </a>
+    <nav class="user-menu header-menu" togglable-nav>
+        <div class="menu-caption current-user">
+            <img src="assets/img/icon_award.svg" alt="Resm.es User Icon" class="left-icon">
+            <a href="#" class="toggle-menu">
+                <img src="assets/img/icon_collapse.svg" alt="Resm.es Expand Icon" class="expand-icon">
+            </a>
+            <p class="no-margins">State of the art resumes<br><span class="font-11-bold">Step up your resume game today!</span></p>
+        </div>
+        <ul class="menu-options collapsable no-margins">
+            <li><a ui-sref="resmes.welcome" ui-sref-active="active">Welcome to Resm.es℠</a></li>
+            <li><a ui-sref="resmes.changelog" ui-sref-active="active">What's New (Changelog)</a></li>
+            <li><a ui-sref="resmes.privacy" ui-sref-active="active">Privacy Policy</a></li>
+            <li><a ui-sref="resmes.terms" ui-sref-active="active">Terms and Conditions</a></li>
+        </ul>
+    </nav>
+    <nav class="header-menu collapsed" togglable-nav>
+        <div class="menu-caption current-cv">
+            <img src="assets/img/icon_aesthetics.svg" alt="Resm.es Toolbox Icon" class="left-icon">
+            <a href="#" class="toggle-menu">
+                <img src="assets/img/icon_collapse.svg" alt="Resm.es Expand Icon" class="expand-icon">
+            </a>
+            <p class="no-margins">
+                Overall Resume Setup<br>
+                <span class="font-11-bold">Select the look and feel of resume</span>
+            </p>
+        </div>
+        <ul class="menu-options collapsable no-margins">
+            <li><a ui-sref="resmes.layouts" ui-sref-active="active">Choose Layout Template</a></li>
+            <li><a ui-sref="resmes.typography" ui-sref-active="active">Customize Typography</a></li>
+        </ul>
+    </nav>
+    <nav class="header-menu collapsed" togglable-nav>
+        <div class="menu-caption current-cv">
+            <img src="assets/img/icon_info.svg" alt="Resm.es Toolbox Icon" class="left-icon">
+            <a href="#" class="toggle-menu">
+                <img src="assets/img/icon_collapse.svg" alt="Resm.es Expand Icon" class="expand-icon">
+            </a>
+            <p class="no-margins">
+                Content Setup<br>
+                <span class="font-11-bold">Introduce yourself, tell your story</span>
+            </p>
+        </div>
+        <div class="menu-options grouped-uls collapsable">
+            <ul class="menu-options no-margins">
+                <li><a ui-sref="resmes.general" ui-sref-active="active">Edit General Info</a></li>
+                <li><a ui-sref="resmes.experience" ui-sref-active="active">Edit Experience</a></li>
+                <li><a ui-sref="resmes.education" ui-sref-active="active">Edit Education</a></li>
+                <li><a ui-sref="resmes.skills" ui-sref-active="active">Edit Skills</a></li>
+            </ul>
+            <ul class="menu-options no-margins">
+                <li><a ui-sref="resmes.additionals" ui-sref-active="active">Edit Additional Info</a></li>
+                <li><a ui-sref="resmes.headings" ui-sref-active="active">Customize Headings</a></li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="cv-menu header-menu last-menu collapsed" togglable-nav>
+        <div class="menu-caption current-cv">
+            <img src="assets/img/icon_resume.svg" alt="Resm.es Resume Icon" class="left-icon">
+            <a href="#" class="toggle-menu">
+                <img src="assets/img/icon_collapse.svg" alt="Resm.es Expand Icon" class="expand-icon">
+            </a>
+            <p class="no-margins">
+                Publishing Setup<br>
+                <span class="font-11-bold">Get your resume out there</span><br>
+            </p>
+        </div>
+        <ul class="menu-options collapsable no-margins">
+            <li><a ui-sref="resmes.export" ui-sref-active="active">Export Resume to PDF</a></li>
+            <li><a>More Coming Soon...</a></li>
+        </ul>
+    </nav>
+    <span class="copyright">&copy; {{ core.currentYear }} Resm.es&#8480; &nbsp; &bull; &nbsp; All Rights Reserved.</span>
+</header>
+
+<section class="app-preview-section fixed-section" custom-scrollbar="minimal-dark">
+
+    <header class="preview-header" ng-if="core.showPreviewHeader">
+        <div class="preview-header-wrapper">
+            <ul class="content self-clear">
+                <li class="notification slide-animation" ng-if="core.notification.enabled">
+                    <span class="bubble">
+                        {{ core.notification.message }}
+                        <a ng-click="core.hideNotification()">×</a>
+                    </span>
+                </li>
+                <li>
+                    <a ui-sref="resmes.drawer" class="breadcrumbs active">My Drawer</a>
+                </li>
+                <li>
+                    <span class="breadcrumbs">&rsaquo;</span>
+                </li>
+                <li>
+                    <span class="breadcrumbs">
+                        {{ previewTitle }}
+                    </span>
+                </li>
+                <li>
+                    <span ng-if="!userSignedIn && !loadingUser">
+                        <span>Are you on Facebook?</span>
+                        &nbsp;
+                        <a ng-click="signIn()" class="button">Sign In</a>
+                    </span>
+                    <!--//-->
+                    <span ng-if="loadingUser">
+                        <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                        {{ loadingUser.message }}
+                    </span>
+                    <!--//-->
+                    <span ng-if="userSignedIn && !loadingUser">
+                        <span ng-if="userSignedIn.name">
+                            Signed In as {{ userSignedIn.name }}
+                        </span>
+                        <span ng-if="!userSignedIn.name">
+                            Account Signed In
+                        </span>
+                        &nbsp;
+                        <a ng-click="core.signOut()" class="button">Sign Out</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        
+    </header>
+    
+    <div class="preview-canvas-wrapper">
+        <iframe class="preview-canvas content" src="{{ core.previewUrl }}" scrolling="no" seamless="seamless"></iframe>
+    </div>
+
+</section>
+
+<div ui-view="subpanel" class="opacity-animation"></div>

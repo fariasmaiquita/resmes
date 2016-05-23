@@ -1,0 +1,52 @@
+<section class="app-views-section fixed-section">
+    <div class="quick-nav">
+        <a ui-sref="resmes.home" class="button" title="Close">×</a>
+        <a ng-click="prevSubpanel()" class="button" title="Prev">&laquo;</a>
+        <a ng-click="nextSubpanel()" class="button" title="Next">&raquo;</a>
+    </div>
+    <div class="view-wrapper fixed-section" custom-scrollbar="minimal-dark">
+        <header class="view-header self-clear">
+            <h5>Edit Additional Info</h5>
+        </header>
+        <ul class="view-entries">
+            <li class="slide-animation" ng-if="adt.loading">
+                <h6 class="loading-alert">
+                    <img src="assets/img/loading_spin.svg" alt="Resm.es Loading Spin">
+                    Loading, please wait...
+                </h6>
+            </li>
+            <li class="slide-animation" ng-if="adt.serverError">
+                <h6>
+                    Internal Server Error.<br>
+                    Entries could not be loaded at this time.
+                </h6>
+            </li>
+            <li ng-repeat="additional in cachedAdditionals | orderBy : adt.prioritySorter" ng-if="!adt.loading && !adt.serverError">
+                <a ui-sref="resmes.additionals.add({ type: additional.type })" class="button" ng-if="additional.empty">Add</a>
+                <h6 class="main-heading capitalized">
+                    {{ additional.type }}
+                </h6>
+                <div class="long-text" ng-if="additional.author">
+                    <p>
+                        <span>
+                            {{ additional.author }}
+                        </span>
+                        <span ng-if="additional.author_position">
+                            &nbsp;/&nbsp; {{ additional.author_position }}
+                        </span>
+                        <span ng-if="additional.author_company">
+                            &nbsp;/&nbsp; {{ additional.author_company }}
+                        </span>
+                    </p>
+                </div>
+                <div class="content long-text" ng-if="additional.content" ng-bind-html="additional.content"></div>
+                <span ng-if="!additional.empty">
+                    <a ui-sref="resmes.additionals.edit({id: additional.id})">Edit</a>
+                    &nbsp;&bull;&nbsp;
+                    <a ui-sref="resmes.additionals.delete({id: additional.id})">Delete</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div ui-view="form" class="opacity-animation"></div>
+</section>
